@@ -2,6 +2,8 @@ import React from 'react'
 import Day from './Day.jsx'
 
 export default function Month({month}) {
+  console.log('MONTH:', month)
+
   return (
     <div className='flex-1 grid grid-cols-7 grid-rows-5'>
       {
@@ -9,7 +11,7 @@ export default function Month({month}) {
           <React.Fragment key={i}>
             {
               row.map((day, index) => (
-                <Day day={day} key={index}/>
+                <Day day={day} key={index} rowIndex={i}/>
               ))
             }
           </React.Fragment>
