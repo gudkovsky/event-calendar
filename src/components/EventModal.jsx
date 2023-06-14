@@ -4,9 +4,31 @@ import GlobalContext from '../context/GlobalContext.jsx'
 const labelsColors = ['indigo', 'gray', 'green', 'blue', 'red', 'purple']
 
 export default function EventModal() {
-  const [title, setTitle] = useState('')
-  const [description, setDescription] = useState('')
-  const {setShowEventModal, daySelected} = useContext(GlobalContext)
+  const {setShowEventModal, daySelected, dispatchCalendarEvent, selectedEvent} = useContext(GlobalContext)
+
+  const [title, setTitle] = useState(selectedEvent ? selectedEvent.title : '')
+  const [description, setDescription] = useState(selectedEvent ? selectedEvent.description : '')
+  const [labelSelected, setLabelSelected] = useState(selectedEvent ? labelsColors.find((color) => color === selectedEvent.label) 
+     : labelsColors[0])
+  
+
+  function handleSubmit(evt) {
+    evt.preventDefault()
+    const calendarEvent = {
+      title, 
+      description, 
+      label: labelSelected, 
+      day: daySelected.valueOf(), 
+      id: selectedEvent ? selectedEvent.id : Date.now()
+    }
+
+    if (selectedEvent) {
+      dispatchCalendarEvent({type: 'update', payload: calendarEvent})
+    } else {
+      dispatchCalendarEvent({type: 'push', payload: calendarEvent})
+    }
+    setShowEventModal(false)
+  }
 
   return (
     <div className='h-screen w-full fixed left-0 top-0 flex justify-center items-center'>
@@ -15,11 +37,26 @@ export default function EventModal() {
           <span className='material-icons-outlined text-gray-400'>
             drag_handle
           </span>
+          <div> 
+            {selectedEvent && (
+              <button type='button'
+               onClick={() => {
+                  dispatchCalendarEvent({type: 'delete', payload: selectedEvent})
+                  setShowEventModal(false)
+                }}>
+                <span className='material-icons-outlined text-gray-400'>
+                  delete
+                </span>
+               </button>
+            )}
             <button onClick={() => setShowEventModal(false)}>
-              <span className='material-icons-outlined text-gray-400'>
-                close
-              </span>
-          </button>
+                <span className='material-icons-outlined text-gray-400'>
+                  close
+                </span>
+            </button>
+
+          </div>
+
         </header>
         <div className="p-3">
           <div className="grid grid-cols-1/5 items-end gap-y-7">
@@ -56,18 +93,31 @@ export default function EventModal() {
             <div className='flex gap-x-2'>
               {labelsColors.map((label, i) => (
                 <span key={i}
+                onClick={() => setLabelSelected(label)}
                 className={`w-6 h-6 rounded-full flex items-center justify-center cursor-pointer`}
                 style={{backgroundColor: `${label}`}}
                 >
-                  <span className='material-icons-outlined text-white text-sm'>
-                    check
-                  </span>
+                  {
+                  labelSelected === label &&
+                    <span className='material-icons-outlined text-white text-sm'>
+                      check
+                    </span>
+                  }
                 </span>
               )
               )}
             </div>
           </div>
         </div>
+        <footer className='flex justify-end border-t p-3 mt-5'> 
+          <button
+            onClick={handleSubmit}
+            className='bg-blue-500 hover:bg-blue-600 px-6 py-2 rounded text-white' 
+            type='button'
+          >
+            Save
+          </button>
+        </footer>
       </form>
     </div>
   )
