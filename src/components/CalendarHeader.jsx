@@ -15,7 +15,7 @@ function handleNextMonth() {
 }
 
 function handleResetMonth() {
-  setMonthIndex(dayjs().month())
+  setMonthIndex(dayjs().month() === monthIndex ? monthIndex + Math.random() : dayjs().month())
 }
 
   return (
