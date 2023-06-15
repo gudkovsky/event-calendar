@@ -3,6 +3,7 @@ import dayjs from 'dayjs'
 import { getMonth } from '../util.js'
 import GlobalContext from '../context/GlobalContext.jsx'
 
+
 export default function SmallCalendar() {
 const [currentMonthIndex, setCurrentMonthIndex] = useState(dayjs().month())
 const [currentMonth, setCurrentMonth] = useState(getMonth())
@@ -43,9 +44,8 @@ function getDayClass(day) {
   return (
     <div className='mt-9'>
       <header className='flex justify-between'>
-        <p className='text-gray-500 font-bold'>
+        <p className='text-gray-500 font-bold capitalize'>
           {dayjs(new Date(dayjs().year(), currentMonthIndex)).format('MMMM YYYY')}
-          {/* дублирование, можно записать в отдельный компонент */}
         </p>
         <div>
           <button onClick={() => {
@@ -67,7 +67,7 @@ function getDayClass(day) {
       </header>
       <div className='grid grid-cols-7 grid-rows-6'>
         {currentMonth[0].map((day, index) => (
-          <span className='text-sm py-1 text-center' key={index}>
+          <span className='text-sm py-1 text-center capitalize' key={index}>
             {day.format('dd').charAt(0)}
           </span>
         ))}

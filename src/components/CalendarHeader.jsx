@@ -3,6 +3,16 @@ import logo from '../assets/logo.png'
 import GlobalContext from '../context/GlobalContext.jsx'
 import dayjs from 'dayjs'
 
+import 'dayjs/locale/ru.js'
+dayjs.locale('ru')
+
+// import ru from 'dayjs/locale/ru';
+// dayjs.locale({
+//     ...ru,
+
+// });
+// dayjs.Ls.ru.weekStart = 1;
+
 export default function CalendarHeader() {
 const {monthIndex, setMonthIndex} = useContext(GlobalContext)
 
@@ -35,7 +45,7 @@ function handleResetMonth() {
           chevron_right
         </span>
       </button>
-      <h2 className='ml-4 text-xl text-gray-500 font-bold'>
+      <h2 className='ml-4 text-xl text-gray-500 font-bold capitalize'>
         {dayjs(new Date(dayjs().year(), monthIndex)).format('MMMM YYYY')}
       </h2>
     </header>

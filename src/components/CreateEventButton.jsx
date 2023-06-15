@@ -11,7 +11,7 @@ export default function CreateEventButton() {
     onClick={() => setShowEventModal(true)}
    >
     <img src={plus} alt="create-event" className='w-7 h-7' />
-    <span className='pl-3 pr-7'>Create event</span>
+    <span className='pl-3 pr-7'>Событие</span>
    </button>
   )
 }

@@ -59,22 +59,22 @@ export default function EventModal() {
 
         </header>
         <div className="p-3">
-          <div className="grid grid-cols-1/5 items-end gap-y-7">
+          <div className="grid grid-cols-1/5 items-center gap-y-7">
             <div></div>
             <input 
               className='pt-3 pb-2 w-full border-0 border-b-2 border-gray-200 text-gray-600 text-xl font-semibold focus:outline-none focus:ring-0 focus:border-blue-500' 
               type="text" 
               name="title" 
               value={title}  
-              placeholder='Add title' 
+              placeholder='Добавить заголовок' 
               onChange={(e) => setTitle(e.target.value)} 
               required
             />
-            <span className='material-icons-outlined text-gray-400'>
+            <span className='material-icons-outlined text-gray-400 text-right pr-5'>
               schedule
             </span>
-            <p>{daySelected.format('dddd, MMMM DD')}</p>
-            <span className='material-icons-outlined text-gray-400'>
+            <p className='capitalize'>{daySelected.format('dddd, MMMM DD')}</p>
+            <span className='material-icons-outlined text-gray-400 text-right pr-5'>
               segment
             </span>
             <input 
@@ -82,12 +82,12 @@ export default function EventModal() {
               type="text" 
               name="description" 
               value={description}  
-              placeholder='Add description' 
+              placeholder='Добавить описание' 
               onChange={(e) => setDescription(e.target.value)} 
               required
             />
 
-            <span className='material-icons-outlined text-gray-400'>
+            <span className='material-icons-outlined text-gray-400 text-right pr-5'>
               bookmark_border
             </span>
             <div className='flex gap-x-2'>
@@ -115,7 +115,7 @@ export default function EventModal() {
             className='bg-blue-500 hover:bg-blue-600 px-6 py-2 rounded text-white' 
             type='button'
           >
-            Save
+            Сохранить
           </button>
         </footer>
       </form>

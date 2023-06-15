@@ -2,6 +2,17 @@ import React, { useContext, useEffect, useState } from 'react';
 import dayjs from 'dayjs';
 import GlobalContext from '../context/GlobalContext.jsx';
 
+// import 'dayjs/locale/ru.js'
+// dayjs.locale('ru')
+// // dayjs.startOf('week')
+
+
+// import ru from 'dayjs/locale/ru';
+// dayjs.locale({
+//     ...ru,
+//     weekStart: 0,
+// });
+
 export default function Day({day, rowIndex}) {
   const {setDaySelected, setShowEventModal, filteredEvents, setSelectedEvent} = useContext(GlobalContext)
 
@@ -19,7 +30,7 @@ export default function Day({day, rowIndex}) {
     <div className='border border-gray-200 flex flex-col'>
       <header className='flex flex-col items-center'>
         {rowIndex === 0 &&
-          <p className="text-sm mt-1">{day.format('ddd').toUpperCase()}</p>}
+          <p className="text-sm mt-1">{day.format('dddd').toUpperCase()}</p>}
         <p className={`text-sm p-1 my-1 text-center ${getCurrentDayClass()}`}>
         {day.format('DD')}
         </p>
