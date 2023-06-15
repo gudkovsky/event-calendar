@@ -28,16 +28,26 @@ export default function Day({day, rowIndex}) {
         setDaySelected(day);
         setShowEventModal(true);
       }}>
-        {dayEvents.map((evt, index) => (
+        {dayEvents.map((evt, index) => {
+          const colorVariants = {
+            indigo: 'bg-indigo-400',
+            gray: 'bg-gray-400',
+            green: 'bg-green-400',
+            blue: 'bg-blue-400',
+            red: 'bg-red-400',
+            purple: 'bg-purple-400'
+          }
+
+      return    (
           <div 
             key={index} 
-            className={`p-1 mr-3 text-sm rounded mb-1 truncate text-white`} 
-            style={{backgroundColor: `${evt.label}`}}
+            className={`p-1 mr-3 text-sm rounded mb-1 truncate text-white ${colorVariants[evt.label]}`} 
+            // style={{backgroundColor: ``}}
             onClick={() => setSelectedEvent(evt)}
           >
             {evt.title}
           </div>
-        ))}
+        )})}
       </div>
     </div>
   )
